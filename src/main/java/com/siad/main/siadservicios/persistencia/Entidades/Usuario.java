@@ -20,15 +20,51 @@ import lombok.Setter;
 @Table(name = "T_Usuario")
 public class Usuario extends BaseEntity {
 
-  @Column(name = "NombreUsuario", unique = true, nullable = false, length = 50)
-  private String nombreUsuario;
-
-  @Column(name = "Contrasena", nullable = false, length = 50)
-  private String contrasena;
-
-  
-
-  @Column(name = "IdPersonal", nullable = false, length = 50)
+  /**
+   * generame las propiedades de esta clase según esta clase puml:
+   * class Usuario {
+   * -IdPersona : integer
+   * -UserName : string
+   * -PasswordHash : string
+   * -Activo : Boolean
+   * -EmailRecuperacion: string
+   * -FechaExpiracion : string
+   * -UltimoAcceso: DateTime
+   * -Salt : string
+   * -EsprimerAcceso: boolean
+   * -IdRol: int
+   * }
+   */
+  @Column(name = "IdPersona", nullable = false)
   private int IdPersona;
 
+  @Column(name = "IdRol", nullable = false)
+  private int IdRol;
+
+  @Column(name = "UserName", unique = true, nullable = false, length = 50)
+  private String UserName;
+
+  @Column(name = "PasswordHash", nullable = false, length = 50)
+  private String PasswordHash;
+
+  @Column(name = "Activo", nullable = false)
+  private boolean Activo;
+
+  @Column(name = "EmailRecuperacion", nullable = true, length = 100)
+  private String EmailRecuperacion;
+
+  @Column(name = "FechaExpiracion", nullable = true)
+  private String FechaExpiracion;
+
+  @Column(name = "UltimoAcceso", nullable = true)
+  private String UltimoAcceso;
+
+  @Column(name = "Salt", nullable = false, length = 50)
+  private String Salt;
+
+  @Column(name = "EsPrimerAcceso" , nullable = false)
+  private boolean EsPrimerAcceso;
+
+  @Column(name = "PasswordTemp" , nullable = true, length =50)
+  private String PasswordTemp;
 }

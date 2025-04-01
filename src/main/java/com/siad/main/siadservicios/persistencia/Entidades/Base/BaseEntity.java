@@ -29,24 +29,24 @@ public abstract class BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
-    @Column(name = "estado", nullable = false)
+    @Column(name = "Estado", nullable = false)
     private boolean estado;
 
     @CreatedBy
-    @Column(name = "usuarioCreacion", nullable = false)
+    @Column(name = "UsuarioCreacion", nullable = false)
     private String usuarioCreacion;
 
     @LastModifiedBy
-    @Column(name = "usuarioModificacion", nullable = false)
+    @Column(name = "UsuarioModificacion", nullable = false)
     private String usuarioModificacion;
 
     @CreatedDate
-    @Column(name = "fechaCreacion", nullable = false)
+    @Column(name = "FechaCreacion", nullable = false)
     private LocalDateTime fechaCreacion;
 
     @LastModifiedDate
-    @Column(name = "fechaModificacion", nullable = false)
+    @Column(name = "FechaModificacion", nullable = false)
     private LocalDateTime fechaModificacion;
 }

@@ -1,0 +1,172 @@
+@startuml siad
+
+' -------------------------------------------------
+' BaseEntity con campos de auditoría
+' -------------------------------------------------
+class BaseEntity {
+  -Id : integer
+  -Estado : Boolean
+  -UsuarioCreacion : string
+  -UsuarioModificacion : string
+  -FechaCreacion : DateTime
+  -FechaModificacion : DateTime
+}
+
+' -------------------------------------------------
+' Persona
+' -------------------------------------------------
+class Persona {
+  -Nombres : string
+  -Apellidos : string
+  -PrimerNombre: string
+  -SegundoNombre: string
+  -ApellidoPaterno: string
+  -ApellidoMaterno: string
+  -Email: string
+  -Email2: string
+  -Telefono: string
+  -Celular: string
+  -DireccionCompleta: string
+  -IdDireccion : int
+  -FechaNacimiento : int
+  -Edad : int
+  -IdSexo: int
+  -EstadoCivil: int
+  -Foto: string  
+}
+Persona --|> BaseEntity
+
+
+class Direccion {
+  -IdPersona : int
+  -Pais : string
+  -Departamento : string
+  -Provincia : string
+  -Distrito : string
+  -Numero : string
+  -Calle : string
+  -Referencia: string
+}
+Direccion --|> BaseEntity
+
+class Sexo{
+  Nombre: string
+}
+Sexo --|> BaseEntity
+
+class TipoDocumento{
+  Nombre: string
+}
+TipoDocumento --|> BaseEntity
+
+class Usuario {
+  -IdPersona : integer
+  -UserName : string
+  -PasswordHash : string
+  -Activo : Boolean
+  -EmailRecuperacion: string
+  -FechaExpiracion : string
+  -UltimoAcceso: DateTime
+  -Salt : string
+  -EsPrimerAcceso : boolean
+  -PasswordTemp: string
+}
+Usuario --|> BaseEntity
+
+' -------------------------------------------------
+' Profesor, Alumno, Administrador
+' Cada uno se vincula a la tabla Persona
+' con un FK (IdPersona).
+' -------------------------------------------------
+class Profesor {
+  -IdPersona : integer
+  -EsTutor : Boolean
+  -Especialidad : string
+  -Cargo: string
+  -Cedula: string  
+  -Activo: boolean
+}
+Profesor --|> BaseEntity
+
+class Alumno {
+  -IdPersona : integer
+  -Matricula : string
+  -IdAñoAcademico: integer
+  -Cedula: string
+}
+Alumno --|> BaseEntity
+
+class Administrador {
+  -IdPersona : integer
+  -Cargo : string
+  -Dependencia : string
+  -FechaInicioCargo : Date
+  -FechaFinCargo : Date
+  -Observaciones : string
+  -Activo: boolean
+  -EsPersonalTempora
+}
+Administrador --|> BaseEntity
+
+' -------------------------------------------------
+' Tabla/clase Para persona rol en caso una persona tenga mas de un rol
+' -------------------------------------------------
+class PersonaRol{
+  -IdPersona: integer
+  -IdRol: integer
+}
+
+
+
+' -------------------------------------------------
+' Tabla/clase para los menús o módulos del sistema
+' -------------------------------------------------
+class SistemaMenu {
+  -NombreMenu : string
+  -Descripcion : string
+  -Url: string
+  -Icono: string
+}
+SistemaMenu --|> BaseEntity
+
+' -------------------------------------------------
+' Tabla/clase Acceso para relacionar una Persona
+' con uno o varios menús del sistema
+' -------------------------------------------------
+class AccesoMenu{
+  -IdPersona : integer
+  -IdSistemaMenu : integer  
+}
+AccesoMenu --|> BaseEntity
+
+
+' ------------------------
+' Rol
+' ------------------------
+class Rol {
+  -NombreRol : string
+  -Descripcion : string  
+}
+Rol --|> BaseEntity
+
+class RolMenu {
+  -IdRol: integer
+  -IdSistemaMenu: integer
+}
+RolMenu --|> BaseEntity
+
+
+
+
+class AnioAcademico {
+  Nombre: string
+
+}
+AnioAcademico --|> BaseEntity
+
+class Seccion{
+  Nombre: string
+}
+
+
+@enduml
